@@ -4,8 +4,8 @@ import 'package:clean_architecture/data/network/app_api.dart';
 import 'package:clean_architecture/data/network/dio_factory.dart';
 import 'package:clean_architecture/data/network/network_info.dart';
 import 'package:clean_architecture/data/repository_impl/repository_impl.dart';
+import 'package:clean_architecture/domain/repository/repository.dart';
 import 'package:clean_architecture/domain/usecases/login_usecase.dart';
-import 'package:clean_architecture/presentation/login/view/login_view.dart';
 import 'package:clean_architecture/presentation/login/view_model/login_view_model.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -44,7 +44,8 @@ Future<void> initAppModule() async {
       () => RemoteDataSourceImpl(instance()));
 
   // Repository
-  instance.registerLazySingleton(() => RepositoryImpl(instance(), instance()));
+  instance.registerLazySingleton<Repository>(
+      () => RepositoryImpl(instance(), instance()));
 }
 
 initLoginModule() {

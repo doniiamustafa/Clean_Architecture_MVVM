@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:clean_architecture/application/di.dart';
-import 'package:clean_architecture/domain/usecases/login_usecase.dart';
 import 'package:clean_architecture/presentation/login/view_model/login_view_model.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
@@ -27,14 +28,14 @@ class _LoginViewState extends State<LoginView> {
     // 3lshan yb2a up to date l ay changes hate7sal hatsama3 3latol
     _userNameController.addListener(
         () => _loginViewModel.setUserName(_userNameController.text));
-    _userNameController.addListener(
+    _passwordController.addListener(
         () => _loginViewModel.setPassword(_passwordController.text));
   }
 
-  @override
-  void setState(VoidCallback fn) {
+ @override
+  void initState() {
     _bind();
-    super.setState(fn);
+    super.initState();
   }
 
   @override
@@ -114,7 +115,7 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.only(
                       left: AppPaddings.p28, right: AppPaddings.p28),
                   child: StreamBuilder<bool>(
-                    stream: _loginViewModel.outIsInputsValid,
+                    stream: _loginViewModel.outAreAllInputsValid,
                     builder: (context, snapshot) {
                       // if condition true -> enable button else disable it, ?? disbale as default
                       return SizedBox(
@@ -123,6 +124,7 @@ class _LoginViewState extends State<LoginView> {
                         child: ElevatedButton(
                             onPressed: (snapshot.data ?? false)
                                 ? () {
+                                    log("${snapshot.data} message");
                                     _loginViewModel.login();
                                   }
                                 : null,
