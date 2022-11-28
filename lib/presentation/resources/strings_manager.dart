@@ -27,4 +27,5 @@ class AppStrings {
   static const String loading = "loading...";
   static const String ok = "Ok";
   static const String retryAgain = "Retry Again";
+  static const String noData = "No Data Found";
 }

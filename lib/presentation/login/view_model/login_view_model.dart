@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:clean_architecture/domain/usecases/login_usecase.dart';
 import 'package:clean_architecture/presentation/base/base_view_model.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_class.dart';
+import 'package:clean_architecture/presentation/common/render_state/render_state_impl.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -19,13 +20,18 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void dispose() {
+    super.dispose();
     _userNameStreamController.close();
     _passwordStreamController.close();
     _areAllInputsValidStreamController.close();
   }
 
   @override
-  void start() {}
+  void start() {
+    // view model should tell view to render content state
+    // to render login ui
+    inputState.add(ContentState());
+  }
 
   @override
   Sink get inputPassword => _passwordStreamController.sink;

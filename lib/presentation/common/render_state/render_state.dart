@@ -1,3 +1,4 @@
+import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/styles_manager.dart';
@@ -5,6 +6,7 @@ import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lottie/lottie.dart';
 
 enum StateRenderType {
   popUpLoadingState,
@@ -12,12 +14,12 @@ enum StateRenderType {
   fullScreenLoadingState,
   fullScreenErrorState,
   fullScreenEmptyState,
-  successState,
+  contentState,
 }
 
 class StateRenderer extends StatelessWidget {
   StateRenderType stateRenderType;
-  Function retryActionFunction;
+  Function retryActionFunction; //retry button
   String title;
   String message;
 
@@ -35,30 +37,34 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateRendered(BuildContext context) {
     switch (stateRenderType) {
       case StateRenderType.popUpLoadingState:
-        return _getPopupDialog(context, [_getAnimatedImage()]);
+        return _getPopupDialog(
+            context, [_getAnimatedImage(JsonAssets.loading)]);
 
       case StateRenderType.popUpErrorState:
         return _getPopupDialog(context, [
-          _getAnimatedImage(),
+          _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
           _getRetryActionButton(AppStrings.ok, context)
         ]);
 
       case StateRenderType.fullScreenLoadingState:
-        return _getScreenContent(
-            [_getAnimatedImage(), _getMessage(AppStrings.loading)]);
+        return _getScreenContent([
+          _getAnimatedImage(JsonAssets.loading),
+          _getMessage(AppStrings.loading)
+        ]);
 
       case StateRenderType.fullScreenErrorState:
         return _getScreenContent([
-          _getAnimatedImage(),
+          _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
           _getRetryActionButton(AppStrings.retryAgain, context)
         ]);
 
       case StateRenderType.fullScreenEmptyState:
-        return _getScreenContent([_getAnimatedImage(), _getMessage(message)]);
+        return _getScreenContent(
+            [_getAnimatedImage(JsonAssets.empty), _getMessage(message)]);
 
-      case StateRenderType.successState:
+      case StateRenderType.contentState:
         return Container();
 
       default:
@@ -106,9 +112,11 @@ class StateRenderer extends StatelessWidget {
     );
   }
 
-  Widget _getAnimatedImage() {
+  Widget _getAnimatedImage(String _imageName) {
     return SizedBox(
-        height: AppSizes.s100, width: AppSizes.s100, child: Container());
+        height: AppSizes.s100,
+        width: AppSizes.s100,
+        child: Lottie.asset(_imageName));
   }
 
   Widget _getMessage(String message) {
