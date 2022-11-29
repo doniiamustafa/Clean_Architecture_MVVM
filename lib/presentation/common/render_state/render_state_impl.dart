@@ -1,7 +1,6 @@
 import 'package:clean_architecture/application/app_constants.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class StateFlow {
@@ -13,8 +12,8 @@ abstract class StateFlow {
 class LoadingState extends StateFlow {
   String? message;
   StateRenderType stateRenderType;
-  LoadingState({required this.message, required this.stateRenderType});
-
+  LoadingState(
+      {required this.stateRenderType, String message = AppStrings.loading});
   @override
   String getMessage() => message ?? AppStrings.loading;
 
@@ -24,11 +23,11 @@ class LoadingState extends StateFlow {
 
 // Error State POPUP, FULLSCREEN
 class ErrorState extends StateFlow {
-  String message;
   StateRenderType stateRenderType;
+  String message;
   ErrorState(
-    this.message,
     this.stateRenderType,
+    this.message,
   );
 
   @override
@@ -120,10 +119,10 @@ extension FlowStateExtension on StateFlow {
     }
   }
 
-  isCurrentDialogRunning(BuildContext context) {
-    // checking if there is two dialogs running at the same time
+  isCurrentDialogRunning(BuildContext context) =>
     ModalRoute.of(context)?.isCurrent != true;
-  }
+    // checking if there is two dialogs running at the same time
+  
 
   dismissDialog(BuildContext context) {
     // check if there is two dialogs running at the same time and close on of them for example loading and error pop up, close loading
@@ -133,15 +132,12 @@ extension FlowStateExtension on StateFlow {
   }
 
   showPopup(
-      BuildContext context, StateRenderType renderStateType, String message) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => StateRenderer(
-                    stateRenderType: renderStateType,
-                    retryActionFunction: () {},
-                    message: message,
-                  ))
-        });
+      BuildContext context, StateRenderType stateRendererType, String message) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
+        context: context,
+        builder: (BuildContext context) => StateRenderer(
+            stateRenderType: stateRendererType,
+            message: message,
+            retryActionFunction: () {})));
   }
 }

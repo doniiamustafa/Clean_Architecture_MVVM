@@ -3,7 +3,10 @@ import 'dart:developer';
 import 'package:clean_architecture/domain/usecases/login_usecase.dart';
 import 'package:clean_architecture/presentation/base/base_view_model.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_class.dart';
+import 'package:clean_architecture/presentation/common/render_state/render_state.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state_impl.dart';
+import 'package:clean_architecture/presentation/resources/constants_manager.dart';
+import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -56,16 +59,20 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
+    inputState
+        .add(LoadingState(stateRenderType: StateRenderType.popUpLoadingState));
     (await loginUseCase.execute(
             LoginUseCaseInput(loginObject.userName, loginObject.password)))
         .fold(
             (failure) => {
                   // left -> failure
-                  log(failure.message)
+                  inputState.add(ErrorState(
+                      StateRenderType.popUpErrorState, failure.message))
                 },
             (data) => {
                   // right -> data (success)
-                  log(data.customer!.name)
+                  inputState.add(ContentState())
+                  // navigate to main screen
                 });
   }
 

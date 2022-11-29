@@ -16,7 +16,7 @@ abstract class BaseViewModel extends BaseViewModelInputs
   @override
   Stream<StateFlow> get outputState =>
       _inputsStreamController.stream.map((stateFlow) => stateFlow);
-
+  
   @override
   void dispose() {
     // kol dispose mawgod f viewModel zay el login kda hakhli y_call el super.dispose 3lshan yenafez el dispose() di el awel w b3d kda el dispose eli fl model
