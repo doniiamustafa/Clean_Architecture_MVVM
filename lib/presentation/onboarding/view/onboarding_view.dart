@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:clean_architecture/application/app_prefs.dart';
+import 'package:clean_architecture/application/di.dart';
 import 'package:clean_architecture/presentation/onboarding/view_model/onboarding_ViewModel.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
@@ -22,6 +24,8 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
   _bind() {
+    _appPreferences.setOnBoardingViewed();
     _viewModel.start();
   }
 

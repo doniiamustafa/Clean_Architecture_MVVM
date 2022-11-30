@@ -120,9 +120,8 @@ extension FlowStateExtension on StateFlow {
   }
 
   isCurrentDialogRunning(BuildContext context) =>
-    ModalRoute.of(context)?.isCurrent != true;
-    // checking if there is two dialogs running at the same time
-  
+      ModalRoute.of(context)?.isCurrent != true;
+  // checking if there is two dialogs running at the same time
 
   dismissDialog(BuildContext context) {
     // check if there is two dialogs running at the same time and close on of them for example loading and error pop up, close loading
@@ -133,6 +132,7 @@ extension FlowStateExtension on StateFlow {
 
   showPopup(
       BuildContext context, StateRenderType stateRendererType, String message) {
+    // addPostFrameCallback used when we have to render an ui in fucntion body or in logic part
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(

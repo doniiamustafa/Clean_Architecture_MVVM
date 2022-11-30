@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:clean_architecture/application/app_prefs.dart';
+import 'package:clean_architecture/application/di.dart';
 import 'package:clean_architecture/presentation/onboarding/view/onboarding_view.dart';
 import 'package:clean_architecture/presentation/resources/assets_manager.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
@@ -16,6 +18,7 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Timer? _timer;
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   _splashDelay() {
     _timer = Timer(
@@ -23,6 +26,27 @@ class _SplashViewState extends State<SplashView> {
   }
 
   _goNext() {
+    _appPreferences.isLoginViewed().then((isLoggedIn) => {
+          if (isLoggedIn)
+            {Navigator.pushReplacementNamed(context, Routes.mainRoute)}
+          else
+            {
+              _appPreferences
+                  .isOnBoardingViewed()
+                  .then((isOnBoardingViewed) => {
+                        if (isOnBoardingViewed)
+                          {
+                            Navigator.of(context)
+                                .pushReplacementNamed(Routes.loginRoute)
+                          }
+                        else
+                          {
+                            Navigator.of(context)
+                                .pushReplacementNamed(Routes.onboardingRoute)
+                          }
+                      })
+            }
+        });
     Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
   }
 

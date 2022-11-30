@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:clean_architecture/application/app_prefs.dart';
 import 'package:clean_architecture/application/di.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state_impl.dart';
 import 'package:clean_architecture/presentation/login/view_model/login_view_model.dart';
@@ -9,6 +10,7 @@ import 'package:clean_architecture/presentation/resources/route_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -22,6 +24,7 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   _bind() {
     // function to bind view model with view
@@ -31,6 +34,16 @@ class _LoginViewState extends State<LoginView> {
         () => _loginViewModel.setUserName(_userNameController.text));
     _passwordController.addListener(
         () => _loginViewModel.setPassword(_passwordController.text));
+
+    // law el user dkhal el email w el password sa7 isLoggedIn = true therefore ha3mel navigate 3la el mainScreen
+    _loginViewModel.isUserLoggedInStreamController.stream.listen((isLoggedIn) {
+      if (isLoggedIn) {
+        _appPreferences.setLoginViewed();
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+        });
+      }
+    });
   }
 
   @override

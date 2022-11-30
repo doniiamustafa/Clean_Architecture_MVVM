@@ -1,21 +1,29 @@
 import 'dart:async';
-import 'dart:developer';
+import 'package:clean_architecture/application/app_prefs.dart';
+import 'package:clean_architecture/application/di.dart';
 import 'package:clean_architecture/domain/usecases/login_usecase.dart';
 import 'package:clean_architecture/presentation/base/base_view_model.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_class.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state_impl.dart';
-import 'package:clean_architecture/presentation/resources/constants_manager.dart';
-import 'package:clean_architecture/presentation/resources/strings_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
   final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
+
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
+
   final StreamController _areAllInputsValidStreamController =
       StreamController<void>.broadcast(); // void 3lshan mafish data badkhlha
+
+  final StreamController isUserLoggedInStreamController =
+      StreamController<bool>();
+  // msh ha7ot broadcast 3lshan hy3mel listen mara wahda bs once user logged in successfully
+
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   var loginObject = LoginObject("", "");
   final LoginUseCase loginUseCase;
@@ -27,6 +35,7 @@ class LoginViewModel extends BaseViewModel
     _userNameStreamController.close();
     _passwordStreamController.close();
     _areAllInputsValidStreamController.close();
+    isUserLoggedInStreamController.close();
   }
 
   @override
@@ -68,12 +77,13 @@ class LoginViewModel extends BaseViewModel
                   // left -> failure
                   inputState.add(ErrorState(
                       StateRenderType.popUpErrorState, failure.message))
-                },
-            (data) => {
-                  // right -> data (success)
-                  inputState.add(ContentState())
-                  // navigate to main screen
-                });
+                }, (data) {
+      _appPreferences.setLoginViewed();
+      // right -> data (success)
+      inputState.add(ContentState());
+      // navigate to main screen
+      isUserLoggedInStreamController.add(true);
+    });
   }
 
   @override

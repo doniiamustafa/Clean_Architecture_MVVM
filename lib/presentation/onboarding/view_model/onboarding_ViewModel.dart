@@ -9,7 +9,8 @@ import '../../resources/strings_manager.dart';
 
 class OnBoardingViewModel extends BaseViewModel
     with OnBoardingViewModelInput, OnBoardingViewModelOutput {
-  final StreamController _streamController = StreamController<SliderViewObject>();
+  final StreamController _streamController =
+      StreamController<SliderViewObject>();
 
   late final List<SliderObject> _list;
 
@@ -65,7 +66,7 @@ class OnBoardingViewModel extends BaseViewModel
   }
 
   int _currentIndex = 0;
-  
+
   List<SliderObject> _getSliderData() => [
         SliderObject(AppStrings.onBoardingTitle1,
             AppStrings.onBoardingSubTitle1, ImageAssets.onBoardingLogo1),
