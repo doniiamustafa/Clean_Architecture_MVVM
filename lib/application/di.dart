@@ -5,7 +5,9 @@ import 'package:clean_architecture/data/network/dio_factory.dart';
 import 'package:clean_architecture/data/network/network_info.dart';
 import 'package:clean_architecture/data/repository_impl/repository_impl.dart';
 import 'package:clean_architecture/domain/repository/repository.dart';
+import 'package:clean_architecture/domain/usecases/forgetPassword_usecase.dart';
 import 'package:clean_architecture/domain/usecases/login_usecase.dart';
+import 'package:clean_architecture/presentation/forgot_password/view_model/forgetpassword_viewmodel.dart';
 import 'package:clean_architecture/presentation/login/view_model/login_view_model.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -59,5 +61,14 @@ initLoginModule() {
 
     // Login View Model
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  }
+}
+
+initForgetPasswordModule() {
+  if (!GetIt.I.isRegistered<ForgetPasswordUsecase>()) {
+    instance.registerFactory<ForgetPasswordUsecase>(
+        () => ForgetPasswordUsecase(instance()));
+    instance.registerFactory<ForgetPasswordViewModel>(
+        () => ForgetPasswordViewModel(instance()));
   }
 }

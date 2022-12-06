@@ -1,5 +1,5 @@
 import 'package:clean_architecture/application/di.dart';
-import 'package:clean_architecture/presentation/forgot_password/forgot_password.dart';
+import 'package:clean_architecture/presentation/forgot_password/view/forgot_password_view.dart';
 import 'package:clean_architecture/presentation/login/view/login_view.dart';
 import 'package:clean_architecture/presentation/main/main_view.dart';
 import 'package:clean_architecture/presentation/register/register_view.dart';
@@ -33,6 +33,7 @@ class RouteGenerator {
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterView());
       case Routes.forgotPasswordRoute:
+        initForgetPasswordModule();
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
       case Routes.mainRoute:
         return MaterialPageRoute(builder: (_) => const MainView());

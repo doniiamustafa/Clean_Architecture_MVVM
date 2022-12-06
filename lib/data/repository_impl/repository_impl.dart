@@ -1,4 +1,3 @@
-import 'package:clean_architecture/application/app_constants.dart';
 import 'package:clean_architecture/data/data_source/remote_data_source.dart';
 import 'package:clean_architecture/data/failures/error_handler.dart';
 import 'package:clean_architecture/data/mappers/mapper.dart';
@@ -28,6 +27,25 @@ class RepositoryImpl implements Repository {
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> forgetPassword(String email) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDataSource.forgetPassword(email);
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(response.status?? ResponseCode.DEFAULT,
+              response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (e) {
+        return left(ErrorHandler.handle(e).failure);
       }
     } else {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());

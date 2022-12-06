@@ -12,4 +12,7 @@ abstract class AppServiceClient {
   @POST("/customer/login")
   Future<AuthenticationResponse> login(
       @Field("email") String email, @Field("password") String password);
+
+  @POST("/customer/forget-password")
+  Future<ForgetPasswordResponse> forgetPassword(@Field("email") String email);
 }

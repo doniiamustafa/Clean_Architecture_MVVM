@@ -1,6 +1,8 @@
+import 'package:clean_architecture/application/app_constants.dart';
 import 'package:clean_architecture/data/responses/response.dart';
 import 'package:clean_architecture/domain/models/models.dart';
 import 'package:clean_architecture/application/extensions.dart';
+import 'package:clean_architecture/presentation/forgot_password/view_model/forgetpassword_viewmodel.dart';
 
 extension CustomerResponseMapper on CustomerResponse {
   //convert APIs response to model for domain layer
@@ -28,5 +30,11 @@ extension AuthenticationMapper on AuthenticationResponse {
       customer: customer?.toDomain(),
       contacts: contacts?.toDomain(),
     );
+  }
+}
+
+extension ForgetPasswordMapper on ForgetPasswordResponse {
+  String toDomain() {
+    return support.orEmpty();
   }
 }
