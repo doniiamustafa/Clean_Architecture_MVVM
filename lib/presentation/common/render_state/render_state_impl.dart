@@ -60,6 +60,20 @@ class EmptyState extends StateFlow {
   StateRenderType getStateRendertype() => StateRenderType.fullScreenEmptyState;
 }
 
+//  Success State
+class SuccessState extends StateFlow {
+  String message;
+
+  SuccessState(
+    this.message,
+  );
+  @override
+  String getMessage() => message;
+
+  @override
+  StateRenderType getStateRendertype() => StateRenderType.popUpSuccessState;
+}
+
 extension FlowStateExtension on StateFlow {
   // content screen widget means el ui eli byb2a mawgood wara el popup lazem a3redo w a3red fo2eeh as a stack el popup
   Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
@@ -98,6 +112,13 @@ extension FlowStateExtension on StateFlow {
                 retryActionFunction: retryActionFunction);
           }
         }
+      case SuccessState:
+        {
+          dismissDialog(context);
+          showPopup(context, StateRenderType.popUpSuccessState, getMessage(),
+              title: AppStrings.success);
+          return contentScreenWidget;
+        }
       case EmptyState:
         {
           return StateRenderer(
@@ -131,12 +152,14 @@ extension FlowStateExtension on StateFlow {
   }
 
   showPopup(
-      BuildContext context, StateRenderType stateRendererType, String message) {
+      BuildContext context, StateRenderType stateRendererType, String message,
+      {String title = Constant.empty}) {
     // addPostFrameCallback used when we have to render an ui in fucntion body or in logic part
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(
             stateRenderType: stateRendererType,
+            title: title,
             message: message,
             retryActionFunction: () {})));
   }

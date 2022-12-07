@@ -26,6 +26,7 @@ class AppStrings {
   static const String register = "Not a member ? Sign up";
   static const String loading = "loading...";
   static const String ok = "Ok";
+  static const String success = "Success";
   static const String retryAgain = "Retry Again";
   static const String noData = "No Data Found";
   static const String didnotRecieveEmail = "Did'nt recieve email? Resend";

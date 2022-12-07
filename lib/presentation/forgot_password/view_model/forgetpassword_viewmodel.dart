@@ -3,6 +3,7 @@ import 'package:clean_architecture/domain/usecases/forgetPassword_usecase.dart';
 import 'package:clean_architecture/presentation/base/base_view_model.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state_impl.dart';
+import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 
 class ForgetPasswordViewModel extends BaseViewModel
     with ForgetViewInputs, ForgetViewOutputs {
@@ -57,7 +58,10 @@ class ForgetPasswordViewModel extends BaseViewModel
     (await _usecase.execute(email)).fold((failure) {
       inputState
           .add(ErrorState(StateRenderType.popUpErrorState, failure.message));
-    }, (success) => inputState.add(ContentState()));
+    }, (success) {
+      inputState.add(
+          SuccessState(success));
+    });
   }
 
   @override
