@@ -30,4 +30,11 @@ class AppStrings {
   static const String retryAgain = "Retry Again";
   static const String noData = "No Data Found";
   static const String didnotRecieveEmail = "Did'nt recieve email? Resend";
+
+  static const String emailNotValid = "please enter a valid email";
+  static const String passwordNotValid = "please enter a valid password";
+  static const String phoneNumberNotValid =
+      "please enter a valid phone number ";
+  static const String userNameNotValid = "please enter a valid user name ";
+  static const String profilePicNotValid = "please enter a valid user name ";
 }

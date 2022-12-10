@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:clean_architecture/application/functions.dart';
 import 'package:clean_architecture/domain/usecases/forgetPassword_usecase.dart';
 import 'package:clean_architecture/presentation/base/base_view_model.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state.dart';
@@ -41,12 +42,6 @@ class ForgetPasswordViewModel extends BaseViewModel
   Stream<bool> get outAreAllInputsValid =>
       _areAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
 
-  isEmailValid(String email) {
-    return RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email);
-  }
-
   _isAllInputsValid() {
     return isEmailValid(email);
   }
@@ -59,8 +54,7 @@ class ForgetPasswordViewModel extends BaseViewModel
       inputState
           .add(ErrorState(StateRenderType.popUpErrorState, failure.message));
     }, (success) {
-      inputState.add(
-          SuccessState(success));
+      inputState.add(SuccessState(success));
     });
   }
 

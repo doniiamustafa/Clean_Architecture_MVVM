@@ -2,7 +2,7 @@ import 'package:clean_architecture/application/di.dart';
 import 'package:clean_architecture/presentation/forgot_password/view/forgot_password_view.dart';
 import 'package:clean_architecture/presentation/login/view/login_view.dart';
 import 'package:clean_architecture/presentation/main/main_view.dart';
-import 'package:clean_architecture/presentation/register/register_view.dart';
+import 'package:clean_architecture/presentation/register/view/register_view.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/splash/splash_view.dart';
 import 'package:clean_architecture/presentation/store_details/store_details_view.dart';
