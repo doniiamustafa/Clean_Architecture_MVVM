@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:clean_architecture/data/network/app_api.dart';
 import 'package:clean_architecture/data/requests/requests.dart';
 import 'package:clean_architecture/data/responses/response.dart';
@@ -25,12 +27,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<AuthenticationResponse> register(
       RegisterRequest registerRequest) async {
+    log("username ${registerRequest.userName}, password ${registerRequest.password}, email ${registerRequest.email}, mobileCode${registerRequest.mobileCode}, mobileNumber ${registerRequest.mobileNumber}");
     return await appServiceClient.register(
-        registerRequest.email,
-        registerRequest.password,
-        registerRequest.mobileCode,
-        registerRequest.mobileNumber,
-        registerRequest.profilePicture,
-        registerRequest.userName);
+      userName: registerRequest.userName,
+      email: registerRequest.email,
+      password: registerRequest.password,
+      mobileCode: registerRequest.mobileCode,
+      mobileNumber: registerRequest.mobileNumber,
+      profilePicture: "",
+    );
   }
 }

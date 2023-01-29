@@ -23,7 +23,9 @@ class AppStrings {
   static const String passwordError = "please, enter your password";
   static const String login = "Login";
   static const String forgetPassword = "Forget password";
-  static const String register = "Not a member ? Sign up";
+  static const String notaMember = "Not a member ? Sign up";
+  static const String alreadyHaveAnAccount = "Already have an accout? Login";
+
   static const String loading = "loading...";
   static const String ok = "Ok";
   static const String success = "Success";
@@ -37,4 +39,15 @@ class AppStrings {
       "please enter a valid phone number ";
   static const String userNameNotValid = "please enter a valid user name ";
   static const String profilePicNotValid = "please enter a valid user name ";
+  static const String register = "Register";
+  static const String mobileNumber = "Mobile Number";
+  static const String email = "Email";
+  static const String profilePicture = "Profile Picture";
+  static const String photoCamera = "Camera";
+  static const String photoGallery = "Gallery";
+
+  static const String home = "Home";
+  static const String settings = "Settings";
+  static const String notifications = "Notifications";
+  static const String search = "Search";
 }

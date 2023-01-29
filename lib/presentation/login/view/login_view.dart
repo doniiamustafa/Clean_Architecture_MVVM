@@ -180,7 +180,7 @@ class _LoginViewState extends State<LoginView> {
                             Navigator.pushNamed(context, Routes.registerRoute);
                           },
                           child: Text(
-                            AppStrings.register,
+                            AppStrings.notaMember,
                             style: Theme.of(context).textTheme.bodyMedium,
                             textAlign: TextAlign.end,
                           )),
