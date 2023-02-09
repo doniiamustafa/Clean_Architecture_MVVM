@@ -1,5 +1,7 @@
 // on boarding models
 
+import 'package:flutter/cupertino.dart';
+
 class SliderObject {
   String title;
   String subTtile;
@@ -42,4 +44,49 @@ class Authentication {
     required this.customer,
     required this.contacts,
   });
+}
+
+class Services {
+  int id;
+  String image;
+  String title;
+
+  Services({required this.id, required this.image, required this.title});
+}
+
+class BannersAd {
+  int id;
+  String image;
+  String link;
+  String title;
+
+  BannersAd(
+      {required this.id,
+      required this.image,
+      required this.link,
+      required this.title});
+}
+
+class Stores {
+  int id;
+  String image;
+  String title;
+
+  Stores({required this.id, required this.image, required this.title});
+}
+
+class HomeData {
+  List<BannersAd> bannersAd;
+
+  List<Services> services;
+
+  List<Stores> stores;
+
+  HomeData(
+      {required this.bannersAd, required this.services, required this.stores});
+}
+
+class Home {
+  HomeData homeData;
+  Home(this.homeData);
 }

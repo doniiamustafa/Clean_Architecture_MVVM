@@ -40,8 +40,7 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void start() {
-    // view model should tell view to render content state
-    // to render login ui
+    // view model should tell view to render content state which means render login ui
     inputState.add(ContentState());
   }
 

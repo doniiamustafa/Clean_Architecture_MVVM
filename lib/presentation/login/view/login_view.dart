@@ -175,15 +175,15 @@ class _LoginViewState extends State<LoginView> {
                             style: Theme.of(context).textTheme.bodyMedium,
                             textAlign: TextAlign.end,
                           )),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, Routes.registerRoute);
-                          },
-                          child: Text(
-                            AppStrings.notaMember,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            textAlign: TextAlign.end,
-                          )),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.registerRoute);
+                            },
+                            child: Text(
+                              AppStrings.notaMember,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              textAlign: TextAlign.end,
+                            )),
                     ]),
               )
             ],

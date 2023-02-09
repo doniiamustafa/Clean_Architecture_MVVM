@@ -1,9 +1,8 @@
-import 'package:clean_architecture/presentation/main/pages/home_page,.dart';
-import 'package:clean_architecture/presentation/main/pages/notifications_page.dart';
-import 'package:clean_architecture/presentation/main/pages/search_page.dart';
-import 'package:clean_architecture/presentation/main/pages/settings.dart';
+import 'package:clean_architecture/presentation/main/pages/home/home_view.dart';
+import 'package:clean_architecture/presentation/main/pages/notifications/notifications_view.dart';
+import 'package:clean_architecture/presentation/main/pages/search/search_view.dart';
+import 'package:clean_architecture/presentation/main/pages/settings/settings_view.dart';
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
-import 'package:clean_architecture/presentation/resources/constants_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class MainView extends StatefulWidget {
 }
 
 List<Widget> pages = const [
-  HomePage(),
+  HomeView(),
   SearchPage(),
   NotificationsPage(),
   SettingsPage(),
