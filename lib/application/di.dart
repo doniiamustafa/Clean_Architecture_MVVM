@@ -1,4 +1,5 @@
 import 'package:clean_architecture/application/app_prefs.dart';
+import 'package:clean_architecture/data/data_source/local_data_source.dart';
 import 'package:clean_architecture/data/data_source/remote_data_source.dart';
 import 'package:clean_architecture/data/network/app_api.dart';
 import 'package:clean_architecture/data/network/dio_factory.dart';
@@ -7,12 +8,14 @@ import 'package:clean_architecture/data/repository_impl/repository_impl.dart';
 import 'package:clean_architecture/domain/repository/repository.dart';
 import 'package:clean_architecture/domain/usecases/forgetPassword_usecase.dart';
 import 'package:clean_architecture/domain/usecases/getHomeData_usecase.dart';
+import 'package:clean_architecture/domain/usecases/getStoreDetails_usecase.dart';
 import 'package:clean_architecture/domain/usecases/login_usecase.dart';
 import 'package:clean_architecture/domain/usecases/register_usecase.dart';
 import 'package:clean_architecture/presentation/forgot_password/view_model/forgetpassword_viewmodel.dart';
 import 'package:clean_architecture/presentation/login/view_model/login_view_model.dart';
 import 'package:clean_architecture/presentation/main/pages/home/home_view_model.dart';
 import 'package:clean_architecture/presentation/register/view_model/register_view_model.dart';
+import 'package:clean_architecture/presentation/store_details/store_details_view_model.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,9 +53,12 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(instance()));
 
+  // Local Data Source
+  instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
+
   // Repository
   instance.registerLazySingleton<Repository>(
-      () => RepositoryImpl(instance(), instance()));
+      () => RepositoryImpl(instance(), instance(), instance()));
 }
 
 initLoginModule() {
@@ -93,5 +99,14 @@ initHomeModule() {
     instance
         .registerFactory<HomeDataUseCase>(() => HomeDataUseCase(instance()));
     instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
+  }
+}
+
+initStoreDetailsModule() {
+  if (!GetIt.I.isRegistered<GetStoreDetailsUseCase>()) {
+    instance.registerFactory<GetStoreDetailsUseCase>(
+        () => GetStoreDetailsUseCase(instance()));
+    instance.registerFactory<StoreDetailsViewModel>(
+        () => StoreDetailsViewModel(instance()));
   }
 }

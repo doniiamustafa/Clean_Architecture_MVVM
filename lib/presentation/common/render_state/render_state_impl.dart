@@ -23,8 +23,8 @@ class LoadingState extends StateFlow {
 
 // Error State POPUP, FULLSCREEN
 class ErrorState extends StateFlow {
-  StateRenderType stateRenderType;
   String message;
+  StateRenderType stateRenderType;
   ErrorState(
     this.stateRenderType,
     this.message,

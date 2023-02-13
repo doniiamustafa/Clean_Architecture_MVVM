@@ -104,3 +104,16 @@ extension HomeResponseMapper on HomeResponse {
     return Home(data);
   }
 }
+
+extension StoreDetailsResponseMapper on StoreDetailsResponse {
+  StoreDetails toDomain() {
+    return StoreDetails(
+      id: id ?? Constant.zero,
+      image: image.orEmpty(),
+      about: about.orEmpty(),
+      details: details.orEmpty(),
+      services: details.orEmpty(),
+      title: title.orEmpty(),
+    );
+  }
+}

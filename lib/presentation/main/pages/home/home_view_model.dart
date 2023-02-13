@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:ffi';
 
 import 'package:clean_architecture/domain/models/models.dart';
@@ -53,6 +54,7 @@ class HomeViewModel extends BaseViewModel with HomeInputs, HomeOutputs {
       // in case data was received successfully
       // render home screen content then send banners, stores and services in sink through stream controllers to get then in list from streams
       inputState.add(ContentState());
+
       // inputBanners.add(data.homeData?.bannersAd);
       // inputServices.add(data.homeData?.services);
       // inputStores.add(data.homeData?.stores);

@@ -54,4 +54,8 @@ class AppStrings {
   static const String services = "Services";
   static const String stores = "Stores";
   static const String banners = "Banners";
+
+  static const String details = "Details";
+  static const String about = "About Store";
+  static const String storeDetails = "Store details";
 }
