@@ -5,6 +5,7 @@ import 'package:clean_architecture/presentation/main/pages/settings/settings_vie
 import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
@@ -14,13 +15,13 @@ class MainView extends StatefulWidget {
   State<MainView> createState() => _MainViewState();
 }
 
-List<Widget> pages = const [
-  HomeView(),
-  SearchPage(),
-  NotificationsPage(),
+List<Widget> pages = [
+  const HomeView(),
+  const SearchPage(),
+  const NotificationsPage(),
   SettingsPage(),
 ];
-List<String> pageTitles = const [
+List<String> pageTitles = [
   AppStrings.home,
   AppStrings.search,
   AppStrings.notifications,
@@ -34,7 +35,7 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          pageTitles[currentIndex],
+          pageTitles[currentIndex].tr(),
           style: Theme.of(context).textTheme.bodySmall,
         ),
         backgroundColor: ColorManager.primary,
@@ -45,16 +46,16 @@ class _MainViewState extends State<MainView> {
           BoxShadow(color: ColorManager.lightGray, spreadRadius: AppSizes.s1_5)
         ]),
         child: BottomNavigationBar(
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: AppStrings.home),
+                icon: Icon(Icons.home_outlined), label: AppStrings.home.tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: AppStrings.search),
+                icon: Icon(Icons.search), label: AppStrings.search.tr()),
             BottomNavigationBarItem(
                 icon: Icon(Icons.notifications),
-                label: AppStrings.notifications),
+                label: AppStrings.notifications.tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: AppStrings.settings),
+                icon: Icon(Icons.settings), label: AppStrings.settings.tr()),
           ],
           selectedItemColor: ColorManager.primary,
           unselectedItemColor: ColorManager.grey,

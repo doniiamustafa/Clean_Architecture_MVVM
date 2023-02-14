@@ -12,6 +12,7 @@ import 'package:clean_architecture/presentation/base/base_view_model.dart';
 import 'package:clean_architecture/presentation/common/freezed_data_class.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../common/render_state/render_state_impl.dart';
 
@@ -157,7 +158,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   Stream<String?> get outputIsEmailError => outputIsEmailValid
-      .map((isEmailValid) => isEmailValid ? null : AppStrings.emailNotValid);
+      .map((isEmailValid) => isEmailValid ? null : AppStrings.emailNotValid.tr());
 
   @override
   Stream<bool> get outputIsPasswordValid => _passwordStreamController.stream
@@ -165,7 +166,7 @@ class RegisterViewModel extends BaseViewModel
   @override
   Stream<String?> get outputIsPasswordError =>
       outputIsPasswordValid.map((isPasswordValid) =>
-          isPasswordValid ? null : AppStrings.passwordNotValid);
+          isPasswordValid ? null : AppStrings.passwordNotValid.tr());
 
   @override
   Stream<bool> get outputIsPhoneNumberValid =>
@@ -175,7 +176,7 @@ class RegisterViewModel extends BaseViewModel
   @override
   Stream<String?> get outputIsPhoneNumberError =>
       outputIsPhoneNumberValid.map((isPhoneNumberValid) =>
-          isPhoneNumberValid ? null : AppStrings.phoneNumberNotValid);
+          isPhoneNumberValid ? null : AppStrings.phoneNumberNotValid.tr());
 
   @override
   Stream<bool> get outputIsUserNameValid => _userNameStreamController.stream
@@ -184,7 +185,7 @@ class RegisterViewModel extends BaseViewModel
   @override
   Stream<String?> get outputIsUserNameError =>
       outputIsUserNameValid.map((isUserNameValid) =>
-          isUserNameValid ? null : AppStrings.userNameNotValid);
+          isUserNameValid ? null : AppStrings.userNameNotValid.tr());
 
   @override
   Stream<File> get outputIsProfilePictureValid =>

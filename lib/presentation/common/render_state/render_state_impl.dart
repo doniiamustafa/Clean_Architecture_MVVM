@@ -1,6 +1,7 @@
 import 'package:clean_architecture/application/app_constants.dart';
 import 'package:clean_architecture/presentation/common/render_state/render_state.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 abstract class StateFlow {
@@ -15,7 +16,7 @@ class LoadingState extends StateFlow {
   LoadingState(
       {required this.stateRenderType, String message = AppStrings.loading});
   @override
-  String getMessage() => message ?? AppStrings.loading;
+  String getMessage() => message ?? AppStrings.loading.tr();
 
   @override
   StateRenderType getStateRendertype() => stateRenderType;
@@ -116,7 +117,7 @@ extension FlowStateExtension on StateFlow {
         {
           dismissDialog(context);
           showPopup(context, StateRenderType.popUpSuccessState, getMessage(),
-              title: AppStrings.success);
+              title: AppStrings.success.tr());
           return contentScreenWidget;
         }
       case EmptyState:

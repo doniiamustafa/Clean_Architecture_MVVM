@@ -77,7 +77,7 @@ class LoginViewModel extends BaseViewModel
                   inputState.add(ErrorState(
                       StateRenderType.popUpErrorState, failure.message))
                 }, (data) {
-      _appPreferences.setLoginViewed();
+      _appPreferences.setUserLoggedIn();
       // right -> data (success)
       inputState.add(ContentState());
       // navigate to main screen

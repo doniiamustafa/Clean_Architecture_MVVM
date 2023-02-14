@@ -10,6 +10,7 @@ import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/route_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -63,9 +64,9 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _getBannerWidget(snapshot.data?.bannersAd),
-              _getSection(AppStrings.services),
+              _getSection(AppStrings.services.tr()),
               _getServicesWidget(snapshot.data?.services),
-              _getSection(AppStrings.stores),
+              _getSection(AppStrings.stores.tr()),
               _getStoresWidget(snapshot.data?.stores)
             ],
           );

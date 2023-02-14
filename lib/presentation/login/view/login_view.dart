@@ -9,6 +9,7 @@ import 'package:clean_architecture/presentation/resources/color_manager.dart';
 import 'package:clean_architecture/presentation/resources/route_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -38,7 +39,7 @@ class _LoginViewState extends State<LoginView> {
     // law el user dkhal el email w el password sa7 isLoggedIn = true therefore ha3mel navigate 3la el mainScreen
     _loginViewModel.isUserLoggedInStreamController.stream.listen((isLoggedIn) {
       if (isLoggedIn) {
-        _appPreferences.setLoginViewed();
+        _appPreferences.setUserLoggedIn();
         SchedulerBinding.instance.addPostFrameCallback((_) {
           Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
         });
@@ -101,11 +102,11 @@ class _LoginViewState extends State<LoginView> {
                       controller: _userNameController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                          hintText: AppStrings.userName,
-                          labelText: AppStrings.userName,
+                          hintText: AppStrings.userName.tr(),
+                          labelText: AppStrings.userName.tr(),
                           errorText: (snapshot.data ?? true
                               ? null
-                              : AppStrings.userNameError)),
+                              : AppStrings.userNameError.tr())),
                     );
                   },
                 ),
@@ -123,11 +124,11 @@ class _LoginViewState extends State<LoginView> {
                       controller: _passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
-                          hintText: AppStrings.password,
-                          labelText: AppStrings.password,
+                          hintText: AppStrings.password.tr(),
+                          labelText: AppStrings.password.tr(),
                           errorText: (snapshot.data ?? true
                               ? null
-                              : AppStrings.passwordError)),
+                              : AppStrings.passwordError.tr())),
                     );
                   },
                 ),
@@ -152,7 +153,7 @@ class _LoginViewState extends State<LoginView> {
                                   _loginViewModel.login();
                                 }
                               : null,
-                          child: const Text(AppStrings.login)),
+                          child: Text(AppStrings.login.tr())),
                     );
                   },
                 ),
@@ -171,19 +172,19 @@ class _LoginViewState extends State<LoginView> {
                                 context, Routes.forgotPasswordRoute);
                           },
                           child: Text(
-                            AppStrings.forgetPassword,
+                            AppStrings.forgetPassword.tr(),
                             style: Theme.of(context).textTheme.bodyMedium,
                             textAlign: TextAlign.end,
                           )),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.registerRoute);
-                            },
-                            child: Text(
-                              AppStrings.notaMember,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                              textAlign: TextAlign.end,
-                            )),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.registerRoute);
+                          },
+                          child: Text(
+                            AppStrings.notaMember.tr(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            textAlign: TextAlign.end,
+                          )),
                     ]),
               )
             ],

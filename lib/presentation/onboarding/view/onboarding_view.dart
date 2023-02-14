@@ -10,6 +10,7 @@ import 'package:clean_architecture/presentation/resources/constants_manager.dart
 import 'package:clean_architecture/presentation/resources/route_manager.dart';
 import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 import 'package:clean_architecture/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -145,7 +146,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           context, Routes.loginRoute);
                     },
                     child: Text(
-                      AppStrings.skip,
+                      AppStrings.skip.tr(),
                       style: Theme.of(context).textTheme.titleMedium,
                       textAlign: TextAlign.end,
                     )),
