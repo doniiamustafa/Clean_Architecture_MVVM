@@ -1,6 +1,4 @@
 import 'package:clean_architecture/application/app_constants.dart';
-import 'package:clean_architecture/presentation/resources/constants_manager.dart';
-import 'package:clean_architecture/presentation/resources/strings_manager.dart';
 
 extension NonNullString on String? {
   String orEmpty() {

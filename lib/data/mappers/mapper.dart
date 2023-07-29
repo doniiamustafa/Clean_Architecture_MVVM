@@ -4,8 +4,6 @@ import 'package:clean_architecture/application/app_constants.dart';
 import 'package:clean_architecture/data/responses/response.dart';
 import 'package:clean_architecture/domain/models/models.dart';
 import 'package:clean_architecture/application/extensions.dart';
-import 'package:clean_architecture/presentation/forgot_password/view_model/forgetpassword_viewmodel.dart';
-import 'package:clean_architecture/presentation/resources/constants_manager.dart';
 
 extension CustomerResponseMapper on CustomerResponse {
   //convert APIs response to model for domain layer

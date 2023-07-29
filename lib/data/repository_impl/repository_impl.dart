@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:clean_architecture/data/data_source/local_data_source.dart';
 import 'package:clean_architecture/data/data_source/remote_data_source.dart';

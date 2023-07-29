@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class MyApp extends StatefulWidget {
-  MyApp._internal(); //named constructor
+  MyApp._internal(); //named constructor kol ma a3mel call by3mel instance gdeda
 
   static final MyApp _instance = MyApp
       ._internal(); // single instance or singleton, ya3ne lma b3melo call bygebli nafs el instance msh by3mel wahda gdeda
 
   factory MyApp() =>
-      _instance; // factory ya3ne kol ma a3melo call by3meli instance gdeda
+      _instance; // factory ya3ne kol ma a3melo call bygeli nafs el instance msh by3mel wahda gdeda
 
   @override
   State<MyApp> createState() => _MyAppState();

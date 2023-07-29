@@ -1,7 +1,5 @@
 // on boarding models
 
-import 'package:flutter/cupertino.dart';
-
 class SliderObject {
   String title;
   String subTtile;
